@@ -1,0 +1,102 @@
+<!--
+  lot-detail.html — Detailed view of a single lot.
+
+  Shows all cross-referenced data for one lot:
+    • AC1  — Joined Quality / Shipping / Production data.
+    • AC3  — Shipping status with date.
+    • AC4  — Line attribution.
+    • AC9  — Source file and row number for traceability.
+    • AC11 — Data conflict warning if multiple lines detected.
+
+  Thymeleaf model attribute:
+    ${lot} — a LotDetailDTO record
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: head('Lot Detail — Steelworks Tracker')}"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <!-- Breadcrumb navigation -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/lots}">Lot Lookup</a></li>
+            <li class="breadcrumb-item active" th:text="${lot.lotIdentifier}">LOT-001</li>
+        </ol>
+    </nav>
+
+    <h1>
+        Lot Detail: <span th:text="${lot.lotIdentifier}">LOT-001</span>
+    </h1>
+
+    <!-- AC11: Data Conflict Warning -->
+    <div th:if="${lot.productionLine.startsWith('Multiple')}"
+         class="alert alert-danger">
+        <strong>&#x26A0; Data Conflict (AC11):</strong> This lot appears on multiple production lines.
+        Please review the production records to resolve the discrepancy.
+        <br/>
+        Lines found: <span th:text="${lot.productionLine}">Multiple (Conflict): Line 1, Line 3</span>
+    </div>
+
+    <!-- Detail card -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table table-bordered mb-0">
+                <tbody>
+                <tr>
+                    <th class="w-25">Lot Identifier</th>
+                    <td th:text="${lot.lotIdentifier}">LOT-20260112-001</td>
+                </tr>
+                <tr>
+                    <th>Part Number</th>
+                    <td th:text="${lot.partNumber}">SKU-100</td>
+                </tr>
+                <tr>
+                    <th>Shipping Status (AC3)</th>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${lot.shippingStatus == 'Shipped'} ? 'bg-success' : 'bg-secondary'"
+                              th:text="${lot.shippingStatus}">Shipped</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Production Line (AC4)</th>
+                    <td th:text="${lot.productionLine}">Line 1</td>
+                </tr>
+                <tr>
+                    <th>Defect Summary</th>
+                    <td th:text="${lot.defectSummary}">None</td>
+                </tr>
+                <tr>
+                    <th>Source File (AC9)</th>
+                    <td class="source-info">
+                        <span th:if="${lot.sourceFile != null}"
+                              th:text="${lot.sourceFile}">production_data.csv</span>
+                        <span th:unless="${lot.sourceFile != null}" class="text-muted">N/A</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Source Row (AC9)</th>
+                    <td class="source-info">
+                        <span th:if="${lot.sourceRowNumber != null}"
+                              th:text="${lot.sourceRowNumber}">42</span>
+                        <span th:unless="${lot.sourceRowNumber != null}" class="text-muted">N/A</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Back button -->
+    <a th:href="@{/lots}" class="btn btn-outline-secondary">&larr; Back to Lot Lookup</a>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  pom.xml — Maven Project Object Model for the Steelworks Production Tracker.
+
+  This file declares every dependency, plugin, and build setting for the project.
+  Spring Boot's parent POM provides sensible defaults so we only override what we need.
+
+  Key dependency groups:
+    • spring-boot-starter-web        → Embeds Tomcat + Spring MVC (the REST / web layer)
+    • spring-boot-starter-data-jpa   → JPA / Hibernate ORM for database access
+    • spring-boot-starter-thymeleaf  → Server-side HTML templating engine
+    • spring-boot-starter-validation → Bean Validation (e.g., @NotNull, @Size)
+    • postgresql                     → JDBC driver for Render-hosted PostgreSQL
+    • h2                             → In-memory DB used ONLY during automated tests
+    • spring-boot-starter-test       → JUnit 5 + Mockito + Spring Test utilities
+    • lombok                         → Generates boilerplate (getters/setters/constructors)
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Inherit Spring Boot defaults (dependency versions, plugin config, etc.) -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/> <!-- Look up parent from Maven Central, not the local filesystem -->
+    </parent>
+
+    <!-- ── Project coordinates ────────────────────────────────────────── -->
+    <groupId>com.steelworks</groupId>
+    <artifactId>steelworks-tracker</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Steelworks Production Tracker</name>
+    <description>
+        Cross-references Quality, Shipping, and Production data to detect
+        production-line issues and defects for Operations Analysts.
+    </description>
+
+    <!-- ── Global properties ──────────────────────────────────────────── -->
+    <properties>
+        <java.version>17</java.version>                    <!-- LTS version -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- ── Dependencies ───────────────────────────────────────────────── -->
+    <dependencies>
+
+        <!-- 1. Web layer – embeds Tomcat, provides @RestController / @Controller -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 2. ORM layer – Spring Data JPA wraps Hibernate for DB access -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- 3. Templating – Thymeleaf renders server-side HTML pages -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- 4. Validation – adds @NotBlank, @Size, etc. for request beans -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- 5. PostgreSQL JDBC driver – connects to the Render-hosted database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope> <!-- Only needed at runtime, not compile -->
+        </dependency>
+
+        <!-- 6. Lombok – reduces boilerplate; annotates classes with
+                @Getter/@Setter/@NoArgsConstructor etc.
+                See each entity class for a per-annotation explanation. -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional> <!-- Not transitive to downstream projects -->
+        </dependency>
+
+        <!-- ── Test-only dependencies ────────────────────────────────── -->
+
+        <!-- 7. H2 in-memory DB – used for fast integration tests instead of
+                hitting the real PostgreSQL instance on Render. -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 8. Spring Boot Test – JUnit 5, Mockito, MockMvc, @DataJpaTest, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- ── Build plugins ──────────────────────────────────────────────── -->
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin – creates an executable fat JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Tell the compiler to ignore Lombok-generated code in the JAR -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

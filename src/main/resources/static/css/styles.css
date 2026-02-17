@@ -1,0 +1,111 @@
+/*
+ * styles.css — Custom styles for the Steelworks Production Tracker.
+ *
+ * Bootstrap 5 handles most of the heavy lifting.  These rules add
+ * project-specific tweaks and the trend-arrow styling for AC7.
+ */
+
+/* ── Page-level layout ──────────────────────────────────────────── */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;       /* Ensure footer sticks to the bottom */
+}
+
+main {
+    flex: 1;                 /* Push footer down by letting main area grow */
+}
+
+/* ── Dashboard cards ────────────────────────────────────────────── */
+.dashboard-card {
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #0d6efd; /* Blue left accent */
+}
+
+.dashboard-card .card-header {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+/* Risk alert cards get a red accent */
+.risk-card {
+    border-left-color: #dc3545;
+}
+
+/* Orphaned / conflict cards get an amber accent */
+.warning-card {
+    border-left-color: #ffc107;
+}
+
+/* ── AC7: Trend direction arrows ─────────────────────────────── */
+
+/* UP trend: red arrow — defect frequency is increasing (bad) */
+.trend-up {
+    color: #dc3545;
+    font-weight: bold;
+}
+.trend-up::before {
+    content: "▲ ";
+}
+
+/* DOWN trend: green arrow — defect frequency is decreasing (good) */
+.trend-down {
+    color: #198754;
+    font-weight: bold;
+}
+.trend-down::before {
+    content: "▼ ";
+}
+
+/* FLAT trend: grey dash — no change */
+.trend-flat {
+    color: #6c757d;
+    font-weight: bold;
+}
+.trend-flat::before {
+    content: "— ";
+}
+
+/* NEW trend: blue badge — first appearance */
+.trend-new {
+    color: #0d6efd;
+    font-weight: bold;
+}
+.trend-new::before {
+    content: "★ ";
+}
+
+/* ── Severity badges ────────────────────────────────────────────── */
+.severity-critical {
+    background-color: #dc3545 !important; /* Red */
+}
+
+.severity-major {
+    background-color: #fd7e14 !important; /* Orange */
+}
+
+.severity-minor {
+    background-color: #ffc107 !important; /* Yellow */
+    color: #000 !important;
+}
+
+/* ── Search box ─────────────────────────────────────────────────── */
+.search-box {
+    max-width: 500px;
+}
+
+/* ── Source transparency (AC9) ──────────────────────────────────── */
+.source-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* ── Time grouping toggle (AC8) ─────────────────────────────────── */
+.time-toggle .btn {
+    min-width: 80px;
+}
+
+.time-toggle .btn.active {
+    font-weight: bold;
+}

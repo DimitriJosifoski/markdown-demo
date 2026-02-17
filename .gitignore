@@ -1,0 +1,19 @@
+# ── Build output ──────────────────────────────────────
+target/
+
+# ── IDE files ─────────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# ── OS files ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Environment secrets (NEVER commit) ───────────────
+.env
+
+# ── Lombok generated ─────────────────────────────────
+lombok.config
