@@ -1,4 +1,4 @@
-# Architecture Decision Record: Campus Event Hub Technology Stack
+# Architecture Decision Record: Steelworks Project Technology Stack
 
 ## 1. Backend Framework: Spring Boot (MVC)
 **Status:** Accepted

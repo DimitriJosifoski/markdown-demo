@@ -1,0 +1,8 @@
+com\steelworks\service\ShippingStatusServiceTest.class
+com\steelworks\service\DefectAnalysisServiceTest.class
+com\steelworks\controller\LotLookupControllerTest.class
+com\steelworks\util\LotIdNormalizerTest.class
+com\steelworks\service\DashboardServiceTest.class
+com\steelworks\controller\DashboardControllerTest.class
+com\steelworks\service\DataIntegrityServiceTest.class
+com\steelworks\service\LotLookupServiceTest.class

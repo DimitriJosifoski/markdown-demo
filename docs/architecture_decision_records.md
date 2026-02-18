@@ -1,4 +1,4 @@
-# Architecture Decision Record: Campus Event Hub Core Infrastructure
+# Architecture Decision Record: Steelworks Project Core Infrastructure
 
 ## 1. System Roles & Communication: Client–Server
 **Status:** Accepted

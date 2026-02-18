@@ -1,14 +1,14 @@
 # markdown-demo
 
-A documentation repository containing architectural decision records (ADRs) and design documentation for the Campus Event Hub system.
+A documentation repository containing architectural decision records (ADRs) and design documentation for the Steelworks Project system.
 
 ## Overview
 
-This repository serves as the central documentation hub for the Campus Event Hub project - an internal university system designed to help students discover campus events and enable administrators to manage event submissions.
+This repository serves as the central documentation hub for the Steelworks Project - an internal university system designed to help students discover campus events and enable administrators to manage event submissions.
 
 ## Purpose
 
-The Campus Event Hub is designed to:
+The Steelworks Project is designed to:
 - Help students browse and discover upcoming campus events
 - Allow event organizers to submit events for approval
 - Enable staff administrators to review and manage event submissions
@@ -81,7 +81,3 @@ This repository contains architectural documentation and decision records. When 
 2. Update the relevant ADR document in the `/docs` directory
 3. Ensure consistency with existing architectural patterns
 4. Consider the impact on the small engineering team maintaining the system
-
-## License
-
-This documentation is maintained for internal university use.
