@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DashboardService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.service</a> &gt; <span class="el_source">DashboardService.java</span></div><h1>DashboardService.java</h1><pre class="source lang-java linenums">package com.steelworks.service;
+
+import com.steelworks.dto.DashboardSummaryDTO;
+import com.steelworks.enums.TimeGrouping;
+import org.springframework.stereotype.Service;
+
+/**
+ * Orchestration service for the Summary Dashboard (&quot;Meeting Ready&quot; view). AC5: Includes production
+ * line rankings. AC6: Includes shipping risk alerts. AC7: Includes defect trends. AC8: Defaults to
+ * WEEKLY, supports DAILY and MONTHLY toggle.
+ */
+@Service
+public class DashboardService {
+
+    private final DefectAnalysisService defectAnalysisService;
+    private final ShippingStatusService shippingStatusService;
+
+<span class="fc" id="L18">    public DashboardService(DefectAnalysisService defectAnalysisService,</span>
+            ShippingStatusService shippingStatusService) {
+<span class="fc" id="L20">        this.defectAnalysisService = defectAnalysisService;</span>
+<span class="fc" id="L21">        this.shippingStatusService = shippingStatusService;</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Builds the complete dashboard summary for the given time grouping. AC8: Defaults to WEEKLY if
+     * no time grouping is specified. Aggregates production line rankings (AC5), shipping risk
+     * alerts (AC6), and defect trends (AC7).
+     *
+     * @param timeGrouping
+     *            the time grouping for the report (DAILY, WEEKLY, MONTHLY); defaults to WEEKLY if
+     *            null
+     * @return complete dashboard summary DTO
+     */
+    public DashboardSummaryDTO getDashboardSummary(TimeGrouping timeGrouping) {
+        // TODO: Default to WEEKLY if null; compute date range from time grouping;
+        // delegate to DefectAnalysisService and ShippingStatusService;
+        // assemble and return DashboardSummaryDTO
+<span class="nc" id="L38">        throw new UnsupportedOperationException(&quot;Not yet implemented&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

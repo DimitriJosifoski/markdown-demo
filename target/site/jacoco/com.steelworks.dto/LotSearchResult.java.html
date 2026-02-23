@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LotSearchResult.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.dto</a> &gt; <span class="el_source">LotSearchResult.java</span></div><h1>LotSearchResult.java</h1><pre class="source lang-java linenums">package com.steelworks.dto;
+
+import com.steelworks.enums.ShipStatus;
+
+/**
+ * Output DTO for lot search results. AC1: Contains cross-referenced data from Production, Quality,
+ * and Shipping sources. AC3: Includes computed shipping status. AC9: Includes source file/location
+ * for traceability.
+ */
+public class LotSearchResult {
+
+    private Long lotId;
+    private String lotIdentifier;
+    private String partNumber;
+    private String productionLineName;
+    private ShipStatus shippingStatus;
+    private String defectName;
+    private String defectSeverity;
+    private boolean hasDataConflict;
+    private String sourceReference;
+
+<span class="nc" id="L22">    public LotSearchResult() {</span>
+<span class="nc" id="L23">    }</span>
+
+    public Long getLotId() {
+<span class="nc" id="L26">        return lotId;</span>
+    }
+    public void setLotId(Long lotId) {
+<span class="nc" id="L29">        this.lotId = lotId;</span>
+<span class="nc" id="L30">    }</span>
+
+    public String getLotIdentifier() {
+<span class="nc" id="L33">        return lotIdentifier;</span>
+    }
+    public void setLotIdentifier(String lotIdentifier) {
+<span class="nc" id="L36">        this.lotIdentifier = lotIdentifier;</span>
+<span class="nc" id="L37">    }</span>
+
+    public String getPartNumber() {
+<span class="nc" id="L40">        return partNumber;</span>
+    }
+    public void setPartNumber(String partNumber) {
+<span class="nc" id="L43">        this.partNumber = partNumber;</span>
+<span class="nc" id="L44">    }</span>
+
+    public String getProductionLineName() {
+<span class="nc" id="L47">        return productionLineName;</span>
+    }
+    public void setProductionLineName(String productionLineName) {
+<span class="nc" id="L50">        this.productionLineName = productionLineName;</span>
+<span class="nc" id="L51">    }</span>
+
+    public ShipStatus getShippingStatus() {
+<span class="nc" id="L54">        return shippingStatus;</span>
+    }
+    public void setShippingStatus(ShipStatus shippingStatus) {
+<span class="nc" id="L57">        this.shippingStatus = shippingStatus;</span>
+<span class="nc" id="L58">    }</span>
+
+    public String getDefectName() {
+<span class="nc" id="L61">        return defectName;</span>
+    }
+    public void setDefectName(String defectName) {
+<span class="nc" id="L64">        this.defectName = defectName;</span>
+<span class="nc" id="L65">    }</span>
+
+    public String getDefectSeverity() {
+<span class="nc" id="L68">        return defectSeverity;</span>
+    }
+    public void setDefectSeverity(String defectSeverity) {
+<span class="nc" id="L71">        this.defectSeverity = defectSeverity;</span>
+<span class="nc" id="L72">    }</span>
+
+    public boolean isHasDataConflict() {
+<span class="nc" id="L75">        return hasDataConflict;</span>
+    }
+    public void setHasDataConflict(boolean hasDataConflict) {
+<span class="nc" id="L78">        this.hasDataConflict = hasDataConflict;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getSourceReference() {
+<span class="nc" id="L82">        return sourceReference;</span>
+    }
+    public void setSourceReference(String sourceReference) {
+<span class="nc" id="L85">        this.sourceReference = sourceReference;</span>
+<span class="nc" id="L86">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

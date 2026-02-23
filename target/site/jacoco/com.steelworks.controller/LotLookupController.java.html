@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LotLookupController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.controller</a> &gt; <span class="el_source">LotLookupController.java</span></div><h1>LotLookupController.java</h1><pre class="source lang-java linenums">package com.steelworks.controller;
+
+import com.steelworks.dto.ConsolidatedLotView;
+import com.steelworks.dto.DataConflictDTO;
+import com.steelworks.dto.LotSearchResult;
+import com.steelworks.dto.OrphanedRecordDTO;
+import com.steelworks.service.DataIntegrityService;
+import com.steelworks.service.LotLookupService;
+import java.time.LocalDate;
+import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * REST controller for lot lookup operations. Supports searching by Lot ID (with fuzzy matching) and
+ * date range, and provides data integrity endpoints.
+ */
+@RestController
+@RequestMapping(&quot;/api/lots&quot;)
+public class LotLookupController {
+
+    private static final String NOT_YET_IMPLEMENTED = &quot;Not yet implemented&quot;;
+
+    private final LotLookupService lotLookupService;
+    private final DataIntegrityService dataIntegrityService;
+
+<span class="fc" id="L32">    public LotLookupController(LotLookupService lotLookupService,</span>
+            DataIntegrityService dataIntegrityService) {
+<span class="fc" id="L34">        this.lotLookupService = lotLookupService;</span>
+<span class="fc" id="L35">        this.dataIntegrityService = dataIntegrityService;</span>
+<span class="fc" id="L36">    }</span>
+
+    /**
+     * Searches lots by ID and/or date range. AC1: Returns cross-referenced data from all three
+     * sources. AC2: Supports fuzzy matching on Lot ID.
+     *
+     * @param lotId
+     *            optional Lot ID (supports fuzzy input)
+     * @param startDate
+     *            optional start of date range
+     * @param endDate
+     *            optional end of date range
+     * @return list of matching lot results
+     */
+    @GetMapping(&quot;/search&quot;)
+    public ResponseEntity&lt;List&lt;LotSearchResult&gt;&gt; searchLots(
+            @RequestParam(required = false) String lotId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        // TODO: Build LotSearchRequest from params, delegate to service
+<span class="nc" id="L56">        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);</span>
+    }
+
+    /**
+     * Returns a consolidated view for a single lot joining all data sources. AC1: Cross-references
+     * Production, Quality, and Shipping data. AC9: Includes source file references for
+     * traceability.
+     *
+     * @param id
+     *            the database ID of the lot
+     * @return consolidated lot view
+     */
+    @GetMapping(&quot;/{id}/consolidated&quot;)
+    public ResponseEntity&lt;ConsolidatedLotView&gt; getConsolidatedView(@PathVariable Long id) {
+        // TODO: Delegate to LotLookupService.getConsolidatedView()
+<span class="nc" id="L71">        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);</span>
+    }
+
+    /**
+     * Returns all orphaned records (lots missing from one or more data sources). AC10: Flags
+     * unmatched records as &quot;Orphaned Data.&quot;
+     *
+     * @return list of orphaned record details
+     */
+    @GetMapping(&quot;/orphaned&quot;)
+    public ResponseEntity&lt;List&lt;OrphanedRecordDTO&gt;&gt; getOrphanedRecords() {
+        // TODO: Delegate to LotLookupService.findOrphanedRecords()
+<span class="nc" id="L83">        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);</span>
+    }
+
+    /**
+     * Returns all detected data conflicts for manual review. AC11: Lot IDs associated with multiple
+     * Production Lines are flagged.
+     *
+     * @return list of data conflict details
+     */
+    @GetMapping(&quot;/conflicts&quot;)
+    public ResponseEntity&lt;List&lt;DataConflictDTO&gt;&gt; getDataConflicts() {
+        // TODO: Delegate to DataIntegrityService.detectDataConflicts()
+<span class="nc" id="L95">        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

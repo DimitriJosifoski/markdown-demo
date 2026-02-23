@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShippingLog.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.model</a> &gt; <span class="el_source">ShippingLog.java</span></div><h1>ShippingLog.java</h1><pre class="source lang-java linenums">package com.steelworks.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+
+/**
+ * Record of fulfillment and logistics. AC1: One of the three data sources joined by Lot ID. AC3:
+ * Presence of a valid ship date determines &quot;Shipped&quot; vs &quot;In Inventory&quot; status. AC6: Used to
+ * identify &quot;Problematic Shipped Batches.&quot;
+ */
+@Entity
+@Table(name = &quot;shipping_logs&quot;)
+public class ShippingLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = &quot;ship_date&quot;, nullable = false)
+    private LocalDate shipDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;lot_id&quot;, nullable = false)
+    private Lot lot;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;customer_id&quot;, nullable = false)
+    private Customer customer;
+
+    @Column(name = &quot;sales_order_number&quot;, nullable = false)
+    private String salesOrderNumber;
+
+    @Column(name = &quot;destination_state&quot;, nullable = false, length = 2)
+    private String destinationState;
+
+    @Column(name = &quot;carrier&quot;)
+    private String carrier;
+
+    @Column(name = &quot;bol_number&quot;, nullable = false, unique = true)
+    private String bolNumber;
+
+    @Column(name = &quot;tracking_number&quot;)
+    private String trackingNumber;
+
+    @Column(name = &quot;qty_shipped&quot;, nullable = false)
+    private Integer qtyShipped;
+
+    @Column(name = &quot;ship_status&quot;, nullable = false)
+    private String shipStatus;
+
+    @Column(name = &quot;hold_reason&quot;)
+    private String holdReason;
+
+    @Column(name = &quot;shipping_notes&quot;)
+    private String shippingNotes;
+
+<span class="nc" id="L65">    public ShippingLog() {</span>
+<span class="nc" id="L66">    }</span>
+
+    public Long getId() {
+<span class="nc" id="L69">        return id;</span>
+    }
+    public void setId(Long id) {
+<span class="nc" id="L72">        this.id = id;</span>
+<span class="nc" id="L73">    }</span>
+
+    public LocalDate getShipDate() {
+<span class="nc" id="L76">        return shipDate;</span>
+    }
+    public void setShipDate(LocalDate shipDate) {
+<span class="nc" id="L79">        this.shipDate = shipDate;</span>
+<span class="nc" id="L80">    }</span>
+
+    public Lot getLot() {
+<span class="nc" id="L83">        return lot;</span>
+    }
+    public void setLot(Lot lot) {
+<span class="nc" id="L86">        this.lot = lot;</span>
+<span class="nc" id="L87">    }</span>
+
+    public Customer getCustomer() {
+<span class="nc" id="L90">        return customer;</span>
+    }
+    public void setCustomer(Customer customer) {
+<span class="nc" id="L93">        this.customer = customer;</span>
+<span class="nc" id="L94">    }</span>
+
+    public String getSalesOrderNumber() {
+<span class="nc" id="L97">        return salesOrderNumber;</span>
+    }
+    public void setSalesOrderNumber(String salesOrderNumber) {
+<span class="nc" id="L100">        this.salesOrderNumber = salesOrderNumber;</span>
+<span class="nc" id="L101">    }</span>
+
+    public String getDestinationState() {
+<span class="nc" id="L104">        return destinationState;</span>
+    }
+    public void setDestinationState(String destinationState) {
+<span class="nc" id="L107">        this.destinationState = destinationState;</span>
+<span class="nc" id="L108">    }</span>
+
+    public String getCarrier() {
+<span class="nc" id="L111">        return carrier;</span>
+    }
+    public void setCarrier(String carrier) {
+<span class="nc" id="L114">        this.carrier = carrier;</span>
+<span class="nc" id="L115">    }</span>
+
+    public String getBolNumber() {
+<span class="nc" id="L118">        return bolNumber;</span>
+    }
+    public void setBolNumber(String bolNumber) {
+<span class="nc" id="L121">        this.bolNumber = bolNumber;</span>
+<span class="nc" id="L122">    }</span>
+
+    public String getTrackingNumber() {
+<span class="nc" id="L125">        return trackingNumber;</span>
+    }
+    public void setTrackingNumber(String trackingNumber) {
+<span class="nc" id="L128">        this.trackingNumber = trackingNumber;</span>
+<span class="nc" id="L129">    }</span>
+
+    public Integer getQtyShipped() {
+<span class="nc" id="L132">        return qtyShipped;</span>
+    }
+    public void setQtyShipped(Integer qtyShipped) {
+<span class="nc" id="L135">        this.qtyShipped = qtyShipped;</span>
+<span class="nc" id="L136">    }</span>
+
+    public String getShipStatus() {
+<span class="nc" id="L139">        return shipStatus;</span>
+    }
+    public void setShipStatus(String shipStatus) {
+<span class="nc" id="L142">        this.shipStatus = shipStatus;</span>
+<span class="nc" id="L143">    }</span>
+
+    public String getHoldReason() {
+<span class="nc" id="L146">        return holdReason;</span>
+    }
+    public void setHoldReason(String holdReason) {
+<span class="nc" id="L149">        this.holdReason = holdReason;</span>
+<span class="nc" id="L150">    }</span>
+
+    public String getShippingNotes() {
+<span class="nc" id="L153">        return shippingNotes;</span>
+    }
+    public void setShippingNotes(String shippingNotes) {
+<span class="nc" id="L156">        this.shippingNotes = shippingNotes;</span>
+<span class="nc" id="L157">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsolidatedLotView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.dto</a> &gt; <span class="el_source">ConsolidatedLotView.java</span></div><h1>ConsolidatedLotView.java</h1><pre class="source lang-java linenums">package com.steelworks.dto;
+
+import java.time.LocalDate;
+import java.util.List;
+
+/**
+ * Consolidated view joining Production, Quality, and Shipping data for a single lot. AC1:
+ * Cross-references all three data sources. AC9: Each section includes source file origin for
+ * double-checking.
+ */
+public class ConsolidatedLotView {
+
+    private String lotIdentifier;
+    private String partNumber;
+    private LocalDate createdDate;
+
+    // Production data
+    private List&lt;String&gt; associatedProductionLines;
+    private Integer totalUnitsPlanned;
+    private Integer totalUnitsActual;
+    private Integer totalDowntimeMinutes;
+
+    // Quality / Defect data
+    private List&lt;String&gt; defectsFound;
+    private boolean hasIssueFlag;
+
+    // Shipping data
+    private String shippingStatus;
+    private LocalDate shipDate;
+    private String customerName;
+
+    // AC9: Source traceability
+    private String productionSourceFile;
+    private String shippingSourceFile;
+    private String qualitySourceFile;
+
+<span class="nc" id="L37">    public ConsolidatedLotView() {</span>
+<span class="nc" id="L38">    }</span>
+
+    public String getLotIdentifier() {
+<span class="nc" id="L41">        return lotIdentifier;</span>
+    }
+    public void setLotIdentifier(String lotIdentifier) {
+<span class="nc" id="L44">        this.lotIdentifier = lotIdentifier;</span>
+<span class="nc" id="L45">    }</span>
+
+    public String getPartNumber() {
+<span class="nc" id="L48">        return partNumber;</span>
+    }
+    public void setPartNumber(String partNumber) {
+<span class="nc" id="L51">        this.partNumber = partNumber;</span>
+<span class="nc" id="L52">    }</span>
+
+    public LocalDate getCreatedDate() {
+<span class="nc" id="L55">        return createdDate;</span>
+    }
+    public void setCreatedDate(LocalDate createdDate) {
+<span class="nc" id="L58">        this.createdDate = createdDate;</span>
+<span class="nc" id="L59">    }</span>
+
+    public List&lt;String&gt; getAssociatedProductionLines() {
+<span class="nc" id="L62">        return associatedProductionLines;</span>
+    }
+    public void setAssociatedProductionLines(List&lt;String&gt; associatedProductionLines) {
+<span class="nc" id="L65">        this.associatedProductionLines = associatedProductionLines;</span>
+<span class="nc" id="L66">    }</span>
+
+    public Integer getTotalUnitsPlanned() {
+<span class="nc" id="L69">        return totalUnitsPlanned;</span>
+    }
+    public void setTotalUnitsPlanned(Integer totalUnitsPlanned) {
+<span class="nc" id="L72">        this.totalUnitsPlanned = totalUnitsPlanned;</span>
+<span class="nc" id="L73">    }</span>
+
+    public Integer getTotalUnitsActual() {
+<span class="nc" id="L76">        return totalUnitsActual;</span>
+    }
+    public void setTotalUnitsActual(Integer totalUnitsActual) {
+<span class="nc" id="L79">        this.totalUnitsActual = totalUnitsActual;</span>
+<span class="nc" id="L80">    }</span>
+
+    public Integer getTotalDowntimeMinutes() {
+<span class="nc" id="L83">        return totalDowntimeMinutes;</span>
+    }
+    public void setTotalDowntimeMinutes(Integer totalDowntimeMinutes) {
+<span class="nc" id="L86">        this.totalDowntimeMinutes = totalDowntimeMinutes;</span>
+<span class="nc" id="L87">    }</span>
+
+    public List&lt;String&gt; getDefectsFound() {
+<span class="nc" id="L90">        return defectsFound;</span>
+    }
+    public void setDefectsFound(List&lt;String&gt; defectsFound) {
+<span class="nc" id="L93">        this.defectsFound = defectsFound;</span>
+<span class="nc" id="L94">    }</span>
+
+    public boolean isHasIssueFlag() {
+<span class="nc" id="L97">        return hasIssueFlag;</span>
+    }
+    public void setHasIssueFlag(boolean hasIssueFlag) {
+<span class="nc" id="L100">        this.hasIssueFlag = hasIssueFlag;</span>
+<span class="nc" id="L101">    }</span>
+
+    public String getShippingStatus() {
+<span class="nc" id="L104">        return shippingStatus;</span>
+    }
+    public void setShippingStatus(String shippingStatus) {
+<span class="nc" id="L107">        this.shippingStatus = shippingStatus;</span>
+<span class="nc" id="L108">    }</span>
+
+    public LocalDate getShipDate() {
+<span class="nc" id="L111">        return shipDate;</span>
+    }
+    public void setShipDate(LocalDate shipDate) {
+<span class="nc" id="L114">        this.shipDate = shipDate;</span>
+<span class="nc" id="L115">    }</span>
+
+    public String getCustomerName() {
+<span class="nc" id="L118">        return customerName;</span>
+    }
+    public void setCustomerName(String customerName) {
+<span class="nc" id="L121">        this.customerName = customerName;</span>
+<span class="nc" id="L122">    }</span>
+
+    public String getProductionSourceFile() {
+<span class="nc" id="L125">        return productionSourceFile;</span>
+    }
+    public void setProductionSourceFile(String productionSourceFile) {
+<span class="nc" id="L128">        this.productionSourceFile = productionSourceFile;</span>
+<span class="nc" id="L129">    }</span>
+
+    public String getShippingSourceFile() {
+<span class="nc" id="L132">        return shippingSourceFile;</span>
+    }
+    public void setShippingSourceFile(String shippingSourceFile) {
+<span class="nc" id="L135">        this.shippingSourceFile = shippingSourceFile;</span>
+<span class="nc" id="L136">    }</span>
+
+    public String getQualitySourceFile() {
+<span class="nc" id="L139">        return qualitySourceFile;</span>
+    }
+    public void setQualitySourceFile(String qualitySourceFile) {
+<span class="nc" id="L142">        this.qualitySourceFile = qualitySourceFile;</span>
+<span class="nc" id="L143">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

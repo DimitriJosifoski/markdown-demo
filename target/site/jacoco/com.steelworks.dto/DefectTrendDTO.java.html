@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefectTrendDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.dto</a> &gt; <span class="el_source">DefectTrendDTO.java</span></div><h1>DefectTrendDTO.java</h1><pre class="source lang-java linenums">package com.steelworks.dto;
+
+/**
+ * DTO for defect trend analysis. AC7: Shows if a defect type has increased or decreased in
+ * frequency compared to the previous 7-day period.
+ */
+public class DefectTrendDTO {
+
+    private String defectName;
+    private long currentPeriodCount;
+    private long previousPeriodCount;
+    private TrendDirection trendDirection;
+
+    /**
+     * Visual indicator for defect trend direction. AC7: Represents up/down arrow for frequency
+     * change.
+     */
+<span class="nc" id="L18">    public enum TrendDirection {</span>
+<span class="nc" id="L19">        INCREASING, DECREASING, STABLE</span>
+    }
+
+<span class="nc" id="L22">    public DefectTrendDTO() {</span>
+<span class="nc" id="L23">    }</span>
+
+    public String getDefectName() {
+<span class="nc" id="L26">        return defectName;</span>
+    }
+    public void setDefectName(String defectName) {
+<span class="nc" id="L29">        this.defectName = defectName;</span>
+<span class="nc" id="L30">    }</span>
+
+    public long getCurrentPeriodCount() {
+<span class="nc" id="L33">        return currentPeriodCount;</span>
+    }
+    public void setCurrentPeriodCount(long currentPeriodCount) {
+<span class="nc" id="L36">        this.currentPeriodCount = currentPeriodCount;</span>
+<span class="nc" id="L37">    }</span>
+
+    public long getPreviousPeriodCount() {
+<span class="nc" id="L40">        return previousPeriodCount;</span>
+    }
+    public void setPreviousPeriodCount(long previousPeriodCount) {
+<span class="nc" id="L43">        this.previousPeriodCount = previousPeriodCount;</span>
+<span class="nc" id="L44">    }</span>
+
+    public TrendDirection getTrendDirection() {
+<span class="nc" id="L47">        return trendDirection;</span>
+    }
+    public void setTrendDirection(TrendDirection trendDirection) {
+<span class="nc" id="L50">        this.trendDirection = trendDirection;</span>
+<span class="nc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataIntegrityService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.service</a> &gt; <span class="el_source">DataIntegrityService.java</span></div><h1>DataIntegrityService.java</h1><pre class="source lang-java linenums">package com.steelworks.service;
+
+import com.steelworks.dto.DataConflictDTO;
+import com.steelworks.repository.LotRepository;
+import com.steelworks.repository.ProductionLogRepository;
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+/**
+ * Service for data integrity checks and source traceability. AC9: Provides source file
+ * name/location for any data point. AC11: Detects conflicts where the same Lot ID maps to multiple
+ * Production Lines.
+ */
+@Service
+public class DataIntegrityService {
+
+    private final LotRepository lotRepository;
+    private final ProductionLogRepository productionLogRepository;
+
+<span class="fc" id="L20">    public DataIntegrityService(LotRepository lotRepository,</span>
+            ProductionLogRepository productionLogRepository) {
+<span class="fc" id="L22">        this.lotRepository = lotRepository;</span>
+<span class="fc" id="L23">        this.productionLogRepository = productionLogRepository;</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Retrieves the source file name/location for a specific data point. AC9: Users must be able to
+     * see the source file for any data point in a consolidated view.
+     *
+     * @param entityType
+     *            the type of entity (&quot;production&quot;, &quot;shipping&quot;, &quot;quality&quot;)
+     * @param recordId
+     *            the database ID of the record
+     * @return the source file path or reference string
+     */
+    public String getSourceReference(String entityType, Long recordId) {
+        // TODO: Look up and return the source file/location for the given record
+<span class="nc" id="L38">        throw new UnsupportedOperationException(&quot;Not yet implemented&quot;);</span>
+    }
+
+    /**
+     * Detects Lot IDs that are associated with multiple Production Lines across files. AC11: Flags
+     * &quot;Data Conflict&quot; entries for manual review.
+     *
+     * @return list of data conflicts with the conflicting production line details
+     */
+    public List&lt;DataConflictDTO&gt; detectDataConflicts() {
+        // TODO: Use productionLogRepository.findLotIdsWithMultipleProductionLines()
+        // and build DataConflictDTOs with conflicting line details
+<span class="nc" id="L50">        throw new UnsupportedOperationException(&quot;Not yet implemented&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrphanedRecordDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Steelworks Project</a> &gt; <a href="index.source.html" class="el_package">com.steelworks.dto</a> &gt; <span class="el_source">OrphanedRecordDTO.java</span></div><h1>OrphanedRecordDTO.java</h1><pre class="source lang-java linenums">package com.steelworks.dto;
+
+/**
+ * DTO for orphaned records. AC10: If a Lot ID exists in Quality but not in Production or Shipping,
+ * it is flagged as &quot;Orphaned Data&quot; rather than excluded.
+ */
+public class OrphanedRecordDTO {
+
+    private String lotIdentifier;
+    private boolean inProduction;
+    private boolean inShipping;
+    private boolean inQuality;
+    private String reason;
+
+<span class="nc" id="L15">    public OrphanedRecordDTO() {</span>
+<span class="nc" id="L16">    }</span>
+
+    public String getLotIdentifier() {
+<span class="nc" id="L19">        return lotIdentifier;</span>
+    }
+    public void setLotIdentifier(String lotIdentifier) {
+<span class="nc" id="L22">        this.lotIdentifier = lotIdentifier;</span>
+<span class="nc" id="L23">    }</span>
+
+    public boolean isInProduction() {
+<span class="nc" id="L26">        return inProduction;</span>
+    }
+    public void setInProduction(boolean inProduction) {
+<span class="nc" id="L29">        this.inProduction = inProduction;</span>
+<span class="nc" id="L30">    }</span>
+
+    public boolean isInShipping() {
+<span class="nc" id="L33">        return inShipping;</span>
+    }
+    public void setInShipping(boolean inShipping) {
+<span class="nc" id="L36">        this.inShipping = inShipping;</span>
+<span class="nc" id="L37">    }</span>
+
+    public boolean isInQuality() {
+<span class="nc" id="L40">        return inQuality;</span>
+    }
+    public void setInQuality(boolean inQuality) {
+<span class="nc" id="L43">        this.inQuality = inQuality;</span>
+<span class="nc" id="L44">    }</span>
+
+    public String getReason() {
+<span class="nc" id="L47">        return reason;</span>
+    }
+    public void setReason(String reason) {
+<span class="nc" id="L50">        this.reason = reason;</span>
+<span class="nc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
