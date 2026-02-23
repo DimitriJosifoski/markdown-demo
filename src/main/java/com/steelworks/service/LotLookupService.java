@@ -8,16 +8,13 @@ import com.steelworks.repository.LotRepository;
 import com.steelworks.repository.ProductionLogRepository;
 import com.steelworks.repository.ShippingLogRepository;
 import com.steelworks.util.LotIdNormalizer;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
- * Service for lot lookup and cross-referencing.
- * AC1: Joins data from Quality, Shipping, and Production using Lot ID.
- * AC2: Fuzzy matching via LotIdNormalizer.
- * AC9: Provides source transparency in consolidated views.
- * AC10: Handles orphaned / unmatched records.
+ * Service for lot lookup and cross-referencing. AC1: Joins data from Quality, Shipping, and
+ * Production using Lot ID. AC2: Fuzzy matching via LotIdNormalizer. AC9: Provides source
+ * transparency in consolidated views. AC10: Handles orphaned / unmatched records.
  */
 @Service
 public class LotLookupService {
@@ -28,9 +25,8 @@ public class LotLookupService {
     private final LotIdNormalizer lotIdNormalizer;
 
     public LotLookupService(LotRepository lotRepository,
-                            ProductionLogRepository productionLogRepository,
-                            ShippingLogRepository shippingLogRepository,
-                            LotIdNormalizer lotIdNormalizer) {
+            ProductionLogRepository productionLogRepository,
+            ShippingLogRepository shippingLogRepository, LotIdNormalizer lotIdNormalizer) {
         this.lotRepository = lotRepository;
         this.productionLogRepository = productionLogRepository;
         this.shippingLogRepository = shippingLogRepository;
@@ -38,11 +34,12 @@ public class LotLookupService {
     }
 
     /**
-     * Searches for lots by ID (with fuzzy matching) and optional date range.
-     * AC1: Cross-references Production, Quality (defect data), and Shipping sources.
-     * AC2: Uses fuzzy matching on Lot ID input.
+     * Searches for lots by ID (with fuzzy matching) and optional date range. AC1: Cross-references
+     * Production, Quality (defect data), and Shipping sources. AC2: Uses fuzzy matching on Lot ID
+     * input.
      *
-     * @param request the search criteria (lot ID, date range)
+     * @param request
+     *            the search criteria (lot ID, date range)
      * @return list of matching lot results with cross-referenced data
      */
     public List<LotSearchResult> searchLots(LotSearchRequest request) {
@@ -51,11 +48,12 @@ public class LotLookupService {
     }
 
     /**
-     * Builds a consolidated view for a single lot, joining all data sources.
-     * AC1: Cross-references three data sources using Lot ID as primary key.
-     * AC9: Populates source file references for traceability.
+     * Builds a consolidated view for a single lot, joining all data sources. AC1: Cross-references
+     * three data sources using Lot ID as primary key. AC9: Populates source file references for
+     * traceability.
      *
-     * @param lotId the database ID of the lot
+     * @param lotId
+     *            the database ID of the lot
      * @return consolidated view with production, quality, and shipping data
      */
     public ConsolidatedLotView getConsolidatedView(Long lotId) {
@@ -64,8 +62,8 @@ public class LotLookupService {
     }
 
     /**
-     * Finds lots that exist in one data source but not in others.
-     * AC10: Flags unmatched records as "Orphaned Data" instead of excluding them.
+     * Finds lots that exist in one data source but not in others. AC10: Flags unmatched records as
+     * "Orphaned Data" instead of excluding them.
      *
      * @return list of orphaned records with details on which sources are missing
      */

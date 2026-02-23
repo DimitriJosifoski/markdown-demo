@@ -1,11 +1,18 @@
 package com.steelworks.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 /**
- * Activity record for the manufacturing floor.
- * AC1: One of the three data sources joined by Lot ID.
+ * Activity record for the manufacturing floor. AC1: One of the three data sources joined by Lot ID.
  * AC4: Links each defect to a specific Production Line via timestamps.
  */
 @Entity
@@ -49,38 +56,83 @@ public class ProductionLog {
     @Column(name = "supervisor_notes")
     private String supervisorNotes;
 
-    public ProductionLog() {}
+    public ProductionLog() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public LocalDate getProductionDate() { return productionDate; }
-    public void setProductionDate(LocalDate productionDate) { this.productionDate = productionDate; }
+    public LocalDate getProductionDate() {
+        return productionDate;
+    }
+    public void setProductionDate(LocalDate productionDate) {
+        this.productionDate = productionDate;
+    }
 
-    public String getShift() { return shift; }
-    public void setShift(String shift) { this.shift = shift; }
+    public String getShift() {
+        return shift;
+    }
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
 
-    public ProductionLine getProductionLine() { return productionLine; }
-    public void setProductionLine(ProductionLine productionLine) { this.productionLine = productionLine; }
+    public ProductionLine getProductionLine() {
+        return productionLine;
+    }
+    public void setProductionLine(ProductionLine productionLine) {
+        this.productionLine = productionLine;
+    }
 
-    public Lot getLot() { return lot; }
-    public void setLot(Lot lot) { this.lot = lot; }
+    public Lot getLot() {
+        return lot;
+    }
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
 
-    public DefectType getDefectType() { return defectType; }
-    public void setDefectType(DefectType defectType) { this.defectType = defectType; }
+    public DefectType getDefectType() {
+        return defectType;
+    }
+    public void setDefectType(DefectType defectType) {
+        this.defectType = defectType;
+    }
 
-    public Integer getUnitsPlanned() { return unitsPlanned; }
-    public void setUnitsPlanned(Integer unitsPlanned) { this.unitsPlanned = unitsPlanned; }
+    public Integer getUnitsPlanned() {
+        return unitsPlanned;
+    }
+    public void setUnitsPlanned(Integer unitsPlanned) {
+        this.unitsPlanned = unitsPlanned;
+    }
 
-    public Integer getUnitsActual() { return unitsActual; }
-    public void setUnitsActual(Integer unitsActual) { this.unitsActual = unitsActual; }
+    public Integer getUnitsActual() {
+        return unitsActual;
+    }
+    public void setUnitsActual(Integer unitsActual) {
+        this.unitsActual = unitsActual;
+    }
 
-    public Integer getDowntimeMinutes() { return downtimeMinutes; }
-    public void setDowntimeMinutes(Integer downtimeMinutes) { this.downtimeMinutes = downtimeMinutes; }
+    public Integer getDowntimeMinutes() {
+        return downtimeMinutes;
+    }
+    public void setDowntimeMinutes(Integer downtimeMinutes) {
+        this.downtimeMinutes = downtimeMinutes;
+    }
 
-    public Boolean getIssueFlag() { return issueFlag; }
-    public void setIssueFlag(Boolean issueFlag) { this.issueFlag = issueFlag; }
+    public Boolean getIssueFlag() {
+        return issueFlag;
+    }
+    public void setIssueFlag(Boolean issueFlag) {
+        this.issueFlag = issueFlag;
+    }
 
-    public String getSupervisorNotes() { return supervisorNotes; }
-    public void setSupervisorNotes(String supervisorNotes) { this.supervisorNotes = supervisorNotes; }
+    public String getSupervisorNotes() {
+        return supervisorNotes;
+    }
+    public void setSupervisorNotes(String supervisorNotes) {
+        this.supervisorNotes = supervisorNotes;
+    }
 }

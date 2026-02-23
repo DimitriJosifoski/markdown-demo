@@ -1,12 +1,18 @@
 package com.steelworks.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Normalized production line asset table.
- * Tracks line-specific performance within the facility.
+ * Normalized production line asset table. Tracks line-specific performance within the facility.
  * Maps to the "production_lines" table.
  */
 @Entity

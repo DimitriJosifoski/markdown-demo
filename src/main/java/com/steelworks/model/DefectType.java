@@ -1,10 +1,15 @@
 package com.steelworks.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
- * Standardizes defect/issue names for trending reports.
- * AC7: Defect trending uses this to categorize and compare frequencies.
+ * Standardizes defect/issue names for trending reports. AC7: Defect trending uses this to
+ * categorize and compare frequencies.
  */
 @Entity
 @Table(name = "defect_types")
@@ -26,20 +31,41 @@ public class DefectType {
     @Column(name = "description")
     private String description;
 
-    public DefectType() {}
+    public DefectType() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getDefectCode() { return defectCode; }
-    public void setDefectCode(String defectCode) { this.defectCode = defectCode; }
+    public String getDefectCode() {
+        return defectCode;
+    }
+    public void setDefectCode(String defectCode) {
+        this.defectCode = defectCode;
+    }
 
-    public String getDefectName() { return defectName; }
-    public void setDefectName(String defectName) { this.defectName = defectName; }
+    public String getDefectName() {
+        return defectName;
+    }
+    public void setDefectName(String defectName) {
+        this.defectName = defectName;
+    }
 
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
+    public String getSeverity() {
+        return severity;
+    }
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

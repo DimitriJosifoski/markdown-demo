@@ -1,10 +1,15 @@
 package com.steelworks.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
- * Destination records to identify impact on specific clients.
- * AC6: Used in Shipping Risk Alerts to identify affected customers.
+ * Destination records to identify impact on specific clients. AC6: Used in Shipping Risk Alerts to
+ * identify affected customers.
  */
 @Entity
 @Table(name = "customers")
@@ -20,14 +25,27 @@ public class Customer {
     @Column(name = "region", nullable = false)
     private String region;
 
-    public Customer() {}
+    public Customer() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getCustomerName() { return customerName; }
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
+    public String getCustomerName() {
+        return customerName;
+    }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-    public String getRegion() { return region; }
-    public void setRegion(String region) { this.region = region; }
+    public String getRegion() {
+        return region;
+    }
+    public void setRegion(String region) {
+        this.region = region;
+    }
 }

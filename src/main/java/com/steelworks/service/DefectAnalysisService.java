@@ -2,18 +2,16 @@ package com.steelworks.service;
 
 import com.steelworks.dto.DefectTrendDTO;
 import com.steelworks.dto.ProductionLineRankingDTO;
-import com.steelworks.enums.TimeGrouping;
 import com.steelworks.repository.ProductionLogRepository;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
- * Service for defect analysis, line attribution, ranking, and trending.
- * AC4: Maps defects to specific Production Lines based on Production log timestamps.
- * AC5: Ranks production lines by total defect count for the current period.
- * AC7: Computes defect trend direction (increasing/decreasing/stable).
+ * Service for defect analysis, line attribution, ranking, and trending. AC4: Maps defects to
+ * specific Production Lines based on Production log timestamps. AC5: Ranks production lines by
+ * total defect count for the current period. AC7: Computes defect trend direction
+ * (increasing/decreasing/stable).
  */
 @Service
 public class DefectAnalysisService {
@@ -28,7 +26,8 @@ public class DefectAnalysisService {
      * Retrieves the production line name responsible for a given defect (production log entry).
      * AC4: Every defect is mapped to a specific Production Line based on the Production log.
      *
-     * @param productionLogId the ID of the production log entry with the defect
+     * @param productionLogId
+     *            the ID of the production log entry with the defect
      * @return the name of the production line attributed to the defect
      */
     public String getLineAttribution(Long productionLogId) {
@@ -37,24 +36,27 @@ public class DefectAnalysisService {
     }
 
     /**
-     * Ranks production lines by total defect count within the given date range.
-     * AC5: Summary view ranks production lines by total defect count for the current week.
+     * Ranks production lines by total defect count within the given date range. AC5: Summary view
+     * ranks production lines by total defect count for the current week.
      *
-     * @param startDate beginning of the period
-     * @param endDate   end of the period
+     * @param startDate
+     *            beginning of the period
+     * @param endDate
+     *            end of the period
      * @return ranked list of production lines, highest defects first
      */
-    public List<ProductionLineRankingDTO> rankProductionLinesByDefects(LocalDate startDate, LocalDate endDate) {
+    public List<ProductionLineRankingDTO> rankProductionLinesByDefects(LocalDate startDate,
+            LocalDate endDate) {
         // TODO: Query defect counts per line and build ranked DTOs
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
-     * Computes defect trend direction for each defect type.
-     * AC7: Compares current 7-day period against the previous 7-day period
-     *      and returns an indicator (INCREASING, DECREASING, STABLE).
+     * Computes defect trend direction for each defect type. AC7: Compares current 7-day period
+     * against the previous 7-day period and returns an indicator (INCREASING, DECREASING, STABLE).
      *
-     * @param referenceDate the anchor date for the current period (typically today)
+     * @param referenceDate
+     *            the anchor date for the current period (typically today)
      * @return list of defect trends with direction indicators
      */
     public List<DefectTrendDTO> computeDefectTrends(LocalDate referenceDate) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.12.4">
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\main\java\com\steelworks\controller\LotLookupController.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\main\java\com\steelworks\util\LotIdNormalizer.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\controller\DashboardControllerTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\controller\LotLookupControllerTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\service\DashboardServiceTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\service\DataIntegrityServiceTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\service\DefectAnalysisServiceTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\service\LotLookupServiceTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\service\ShippingStatusServiceTest.java">
+</file>
+<file name="C:\Users\dimce\OneDrive - purdue.edu\Practicum in CS 480\Steelworks example project\markdown-demo\src\test\java\com\steelworks\util\LotIdNormalizerTest.java">
+</file>
+</checkstyle>
