@@ -1,0 +1,25 @@
+minimum_pre_commit_version: "3.7.1"
+
+repos:
+  - repo: local
+    hooks:
+      - id: java-format-check
+        name: Java format check (ruff format equivalent)
+        entry: mvn -q spotless:check
+        language: system
+        pass_filenames: false
+      - id: java-lint-check
+        name: Java lint check (ruff check equivalent)
+        entry: mvn -q checkstyle:check pmd:check
+        language: system
+        pass_filenames: false
+      - id: java-type-check
+        name: Java compile/type check (mypy equivalent)
+        entry: mvn -q -DskipTests compile
+        language: system
+        pass_filenames: false
+      - id: java-unit-tests
+        name: Java unit tests
+        entry: mvn -q test
+        language: system
+        pass_filenames: false

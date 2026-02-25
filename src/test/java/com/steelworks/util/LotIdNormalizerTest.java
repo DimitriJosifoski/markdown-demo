@@ -1,7 +1,9 @@
 package com.steelworks.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,13 +61,13 @@ class LotIdNormalizerTest {
 
     @Test
     void areEquivalent_shouldReturnTrueForMatchingIds() {
-        // TODO: Verify "LOT-123" and "LOT123" are considered equivalent
-        assertNotNull(lotIdNormalizer, TODO_MESSAGE);
+        assertTrue(lotIdNormalizer.areEquivalent("LOT-123", "LOT123"),
+                "Should consider differently formatted matching lot IDs equivalent");
     }
 
     @Test
     void areEquivalent_shouldReturnFalseForDifferentIds() {
-        // TODO: Verify "LOT-123" and "LOT-456" are not equivalent
-        assertNotNull(lotIdNormalizer, TODO_MESSAGE);
+        assertFalse(lotIdNormalizer.areEquivalent("LOT-123", "LOT-456"),
+                "Should treat different lot IDs as non-equivalent");
     }
 }

@@ -35,7 +35,11 @@ public class LotIdNormalizer {
      * @return true if they match after normalization
      */
     public boolean areEquivalent(String lotId1, String lotId2) {
-        // TODO: Implement equivalence check using normalize()
-        throw new UnsupportedOperationException("Not yet implemented");
+        String normalizedLotId1 = normalize(lotId1);
+        String normalizedLotId2 = normalize(lotId2);
+        if (normalizedLotId1 == null || normalizedLotId2 == null) {
+            return false;
+        }
+        return normalizedLotId1.equals(normalizedLotId2);
     }
 }
