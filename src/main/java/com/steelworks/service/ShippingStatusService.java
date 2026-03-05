@@ -2,9 +2,15 @@ package com.steelworks.service;
 
 import com.steelworks.dto.ShippingRiskAlertDTO;
 import com.steelworks.enums.ShipStatus;
+import com.steelworks.model.ProductionLog;
+import com.steelworks.model.ShippingLog;
 import com.steelworks.repository.ProductionLogRepository;
 import com.steelworks.repository.ShippingLogRepository;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,8 +39,8 @@ public class ShippingStatusService {
      * @return SHIPPED or IN_INVENTORY
      */
     public ShipStatus determineShippingStatus(Long lotId) {
-        // TODO: Check shipping log for valid ship date
-        throw new UnsupportedOperationException("Not yet implemented");
+        boolean hasShippingRecord = shippingLogRepository.existsByLotIdAndShipDateIsNotNull(lotId);
+        return hasShippingRecord ? ShipStatus.SHIPPED : ShipStatus.IN_INVENTORY;
     }
 
     /**
@@ -43,8 +49,52 @@ public class ShippingStatusService {
      *
      * @return list of shipping risk alerts ordered by severity
      */
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     public List<ShippingRiskAlertDTO> getProblematicShippedBatches() {
-        // TODO: Join production defect data with shipping data, filter for critical defects
-        throw new UnsupportedOperationException("Not yet implemented");
+        List<ProductionLog> criticalProductionLogs = productionLogRepository.findByIssueFlagTrue()
+                .stream().filter(log -> log.getDefectType() != null)
+                .filter(log -> "CRITICAL".equalsIgnoreCase(log.getDefectType().getSeverity()))
+                .toList();
+
+        if (criticalProductionLogs.isEmpty()) {
+            return List.of();
+        }
+
+        List<Long> lotIds = criticalProductionLogs.stream().map(log -> log.getLot().getId())
+                .distinct().toList();
+        List<ShippingLog> shippedLogs = shippingLogRepository.findShippedLogsForLotIds(lotIds);
+
+        Map<String, ShippingRiskAlertDTO> alertsByKey = new LinkedHashMap<>();
+        for (ProductionLog productionLog : criticalProductionLogs) {
+            ShippingLog shippingLog = findLatestShippingForLot(shippedLogs,
+                    productionLog.getLot().getId());
+            if (shippingLog == null) {
+                continue;
+            }
+
+            String dedupeKey = productionLog.getLot().getId() + "|"
+                    + productionLog.getDefectType().getDefectName();
+            alertsByKey.putIfAbsent(dedupeKey, toAlert(productionLog, shippingLog));
+        }
+
+        List<ShippingRiskAlertDTO> alerts = new ArrayList<>(alertsByKey.values());
+        alerts.sort(Comparator.comparing(ShippingRiskAlertDTO::getShipDate).reversed());
+        return alerts;
+    }
+
+    private ShippingLog findLatestShippingForLot(List<ShippingLog> shippedLogs, Long lotId) {
+        return shippedLogs.stream().filter(log -> log.getLot().getId().equals(lotId))
+                .max(Comparator.comparing(ShippingLog::getShipDate)).orElse(null);
+    }
+
+    private ShippingRiskAlertDTO toAlert(ProductionLog productionLog, ShippingLog shippingLog) {
+        ShippingRiskAlertDTO alert = new ShippingRiskAlertDTO();
+        alert.setLotIdentifier(productionLog.getLot().getLotIdentifier());
+        alert.setDefectName(productionLog.getDefectType().getDefectName());
+        alert.setDefectSeverity(productionLog.getDefectType().getSeverity());
+        alert.setShipDate(shippingLog.getShipDate());
+        alert.setCustomerName(shippingLog.getCustomer().getCustomerName());
+        alert.setProductionLineName(productionLog.getProductionLine().getLineName());
+        return alert;
     }
 }

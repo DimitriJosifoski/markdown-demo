@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steelworks Lot Lookup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="page-lots">
+<div class="ambient-glow"></div>
+<main class="shell">
+    <header class="topbar">
+        <div class="brand-block">
+            <p class="eyebrow">Steelworks Command</p>
+            <h1>Lot Lookup Center</h1>
+            <p class="subtitle">Search lots, review consolidated details, and monitor data integrity flags.</p>
+        </div>
+        <nav class="nav-links">
+            <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+            <a class="nav-link active" th:href="@{/lots}">Lot Lookup</a>
+        </nav>
+    </header>
+
+    <section class="panel">
+        <h2>Search Lots</h2>
+        <form id="lotSearchForm" class="search-grid">
+            <label>
+                Lot ID
+                <input id="lotId" name="lotId" type="text" placeholder="LOT123 or LOT-123">
+            </label>
+            <label>
+                Start Date
+                <input id="startDate" name="startDate" type="date">
+            </label>
+            <label>
+                End Date
+                <input id="endDate" name="endDate" type="date">
+            </label>
+            <button type="submit">Run Search</button>
+        </form>
+        <p id="searchStatus" class="status-pill">Ready</p>
+    </section>
+
+    <section class="panel-grid">
+        <article class="panel panel-span-2">
+            <h2>Search Results</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Lot</th>
+                        <th>Part</th>
+                        <th>Line</th>
+                        <th>Ship Status</th>
+                        <th>Defect</th>
+                        <th>Conflict</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody id="searchTableBody"></tbody>
+                </table>
+            </div>
+            <p id="searchEmpty" class="empty-state hidden">No lots matched your search criteria.</p>
+        </article>
+
+        <article class="panel" id="consolidatedPanel">
+            <h2>Consolidated View</h2>
+            <p id="consolidatedHint" class="empty-state">Select a lot from search results to inspect details.</p>
+            <div id="consolidatedContent" class="hidden">
+                <p><strong>Lot:</strong> <span id="viewLot"></span></p>
+                <p><strong>Part Number:</strong> <span id="viewPart"></span></p>
+                <p><strong>Created Date:</strong> <span id="viewCreated"></span></p>
+                <p><strong>Lines:</strong> <span id="viewLines"></span></p>
+                <p><strong>Units Planned/Actual:</strong> <span id="viewUnits"></span></p>
+                <p><strong>Downtime:</strong> <span id="viewDowntime"></span></p>
+                <p><strong>Defects:</strong> <span id="viewDefects"></span></p>
+                <p><strong>Shipping:</strong> <span id="viewShipping"></span></p>
+                <p><strong>Source refs:</strong> <span id="viewSources"></span></p>
+            </div>
+        </article>
+    </section>
+
+    <section class="panel-grid">
+        <article class="panel">
+            <div class="panel-header">
+                <h2>Orphaned Records</h2>
+                <button id="refreshOrphaned" type="button">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Lot</th>
+                        <th>Production</th>
+                        <th>Shipping</th>
+                        <th>Quality</th>
+                        <th>Reason</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orphanedTableBody"></tbody>
+                </table>
+            </div>
+            <p id="orphanedEmpty" class="empty-state hidden">No orphaned records found.</p>
+        </article>
+
+        <article class="panel">
+            <div class="panel-header">
+                <h2>Data Conflicts</h2>
+                <button id="refreshConflicts" type="button">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Lot</th>
+                        <th>Conflicting Lines</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody id="conflictsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="conflictsEmpty" class="empty-state hidden">No line mapping conflicts detected.</p>
+        </article>
+    </section>
+</main>
+
+<script th:src="@{/js/lots.js}"></script>
+</body>
+</html>

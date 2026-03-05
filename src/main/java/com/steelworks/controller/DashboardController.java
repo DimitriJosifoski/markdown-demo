@@ -36,7 +36,6 @@ public class DashboardController {
     @GetMapping("/summary")
     public ResponseEntity<DashboardSummaryDTO> getDashboardSummary(
             @RequestParam(required = false, defaultValue = "WEEKLY") TimeGrouping timeGrouping) {
-        // TODO: Delegate to DashboardService.getDashboardSummary()
-        throw new UnsupportedOperationException("Not yet implemented");
+        return ResponseEntity.ok(dashboardService.getDashboardSummary(timeGrouping));
     }
 }

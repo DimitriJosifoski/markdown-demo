@@ -2,6 +2,7 @@ package com.steelworks.controller;
 
 import com.steelworks.dto.ConsolidatedLotView;
 import com.steelworks.dto.DataConflictDTO;
+import com.steelworks.dto.LotSearchRequest;
 import com.steelworks.dto.LotSearchResult;
 import com.steelworks.dto.OrphanedRecordDTO;
 import com.steelworks.service.DataIntegrityService;
@@ -23,8 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/lots")
 public class LotLookupController {
-
-    private static final String NOT_YET_IMPLEMENTED = "Not yet implemented";
 
     private final LotLookupService lotLookupService;
     private final DataIntegrityService dataIntegrityService;
@@ -52,8 +51,11 @@ public class LotLookupController {
             @RequestParam(required = false) String lotId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        // TODO: Build LotSearchRequest from params, delegate to service
-        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
+        LotSearchRequest request = new LotSearchRequest();
+        request.setLotId(lotId);
+        request.setStartDate(startDate);
+        request.setEndDate(endDate);
+        return ResponseEntity.ok(lotLookupService.searchLots(request));
     }
 
     /**
@@ -67,8 +69,7 @@ public class LotLookupController {
      */
     @GetMapping("/{id}/consolidated")
     public ResponseEntity<ConsolidatedLotView> getConsolidatedView(@PathVariable Long id) {
-        // TODO: Delegate to LotLookupService.getConsolidatedView()
-        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
+        return ResponseEntity.ok(lotLookupService.getConsolidatedView(id));
     }
 
     /**
@@ -79,8 +80,7 @@ public class LotLookupController {
      */
     @GetMapping("/orphaned")
     public ResponseEntity<List<OrphanedRecordDTO>> getOrphanedRecords() {
-        // TODO: Delegate to LotLookupService.findOrphanedRecords()
-        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
+        return ResponseEntity.ok(lotLookupService.findOrphanedRecords());
     }
 
     /**
@@ -91,7 +91,6 @@ public class LotLookupController {
      */
     @GetMapping("/conflicts")
     public ResponseEntity<List<DataConflictDTO>> getDataConflicts() {
-        // TODO: Delegate to DataIntegrityService.detectDataConflicts()
-        throw new UnsupportedOperationException(NOT_YET_IMPLEMENTED);
+        return ResponseEntity.ok(dataIntegrityService.detectDataConflicts());
     }
 }
