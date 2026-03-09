@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +29,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LotLookupService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LotLookupService.class);
 
     private final LotRepository lotRepository;
     private final ProductionLogRepository productionLogRepository;
@@ -55,6 +60,10 @@ public class LotLookupService {
         String lotIdFilter = request != null ? request.getLotId() : null;
         LocalDate startDateFilter = request != null ? request.getStartDate() : null;
         LocalDate endDateFilter = request != null ? request.getEndDate() : null;
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Searching lots with filters: lotId='{}', startDate={}, endDate={}",
+                    lotIdFilter, startDateFilter, endDateFilter);
+        }
 
         List<LotSearchResult> results = new ArrayList<>();
         for (Lot lot : lotRepository.findAll()) {
@@ -68,6 +77,9 @@ public class LotLookupService {
         }
 
         results.sort(Comparator.comparing(LotSearchResult::getLotIdentifier));
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Lot search produced {} result(s)", results.size());
+        }
         return results;
     }
 
@@ -81,8 +93,15 @@ public class LotLookupService {
      * @return consolidated view with production, quality, and shipping data
      */
     public ConsolidatedLotView getConsolidatedView(Long lotId) {
-        Lot lot = lotRepository.findById(lotId)
-                .orElseThrow(() -> new IllegalArgumentException("Lot not found: " + lotId));
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Building consolidated lot view for lotId={}", lotId);
+        }
+        Optional<Lot> lotOptional = lotRepository.findById(lotId);
+        if (lotOptional.isEmpty()) {
+            LOGGER.warn("Cannot build consolidated lot view because lotId={} was not found", lotId);
+            throw new IllegalArgumentException("Lot not found: " + lotId);
+        }
+        Lot lot = lotOptional.get();
 
         List<ProductionLog> productionLogs = productionLogRepository.findByLotId(lotId);
         List<ShippingLog> shippingLogs = shippingLogRepository.findByLotId(lotId);
@@ -122,6 +141,11 @@ public class LotLookupService {
         view.setShippingSourceFile("db:shipping_logs");
         view.setQualitySourceFile("db:production_logs#quality");
 
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(
+                    "Consolidated lot view built for lotId={} with {} production log(s) and {} shipping log(s)",
+                    lotId, productionLogs.size(), shippingLogs.size());
+        }
         return view;
     }
 
@@ -132,6 +156,9 @@ public class LotLookupService {
      * @return list of orphaned records with details on which sources are missing
      */
     public List<OrphanedRecordDTO> findOrphanedRecords() {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Finding orphaned records");
+        }
         List<OrphanedRecordDTO> orphanedRecords = new ArrayList<>();
 
         for (Lot lot : lotRepository.findAll()) {
@@ -157,6 +184,9 @@ public class LotLookupService {
         }
 
         orphanedRecords.sort(Comparator.comparing(OrphanedRecordDTO::getLotIdentifier));
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Orphaned record detection produced {} record(s)", orphanedRecords.size());
+        }
         return orphanedRecords;
     }
 

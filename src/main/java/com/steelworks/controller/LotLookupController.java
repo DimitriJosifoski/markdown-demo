@@ -9,6 +9,8 @@ import com.steelworks.service.DataIntegrityService;
 import com.steelworks.service.LotLookupService;
 import java.time.LocalDate;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/lots")
 public class LotLookupController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LotLookupController.class);
 
     private final LotLookupService lotLookupService;
     private final DataIntegrityService dataIntegrityService;
@@ -51,11 +55,19 @@ public class LotLookupController {
             @RequestParam(required = false) String lotId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Lot search request received: lotId='{}', startDate={}, endDate={}", lotId,
+                    startDate, endDate);
+        }
         LotSearchRequest request = new LotSearchRequest();
         request.setLotId(lotId);
         request.setStartDate(startDate);
         request.setEndDate(endDate);
-        return ResponseEntity.ok(lotLookupService.searchLots(request));
+        List<LotSearchResult> results = lotLookupService.searchLots(request);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Lot search completed with {} result(s)", results.size());
+        }
+        return ResponseEntity.ok(results);
     }
 
     /**
@@ -69,7 +81,15 @@ public class LotLookupController {
      */
     @GetMapping("/{id}/consolidated")
     public ResponseEntity<ConsolidatedLotView> getConsolidatedView(@PathVariable Long id) {
-        return ResponseEntity.ok(lotLookupService.getConsolidatedView(id));
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Consolidated lot view requested for lotId={}", id);
+        }
+        ConsolidatedLotView consolidatedLotView = lotLookupService.getConsolidatedView(id);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Consolidated lot view produced for lotId={} with shippingStatus={}", id,
+                    consolidatedLotView.getShippingStatus());
+        }
+        return ResponseEntity.ok(consolidatedLotView);
     }
 
     /**
@@ -80,7 +100,14 @@ public class LotLookupController {
      */
     @GetMapping("/orphaned")
     public ResponseEntity<List<OrphanedRecordDTO>> getOrphanedRecords() {
-        return ResponseEntity.ok(lotLookupService.findOrphanedRecords());
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Orphaned records query requested");
+        }
+        List<OrphanedRecordDTO> orphanedRecords = lotLookupService.findOrphanedRecords();
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Orphaned records query returned {} record(s)", orphanedRecords.size());
+        }
+        return ResponseEntity.ok(orphanedRecords);
     }
 
     /**
@@ -91,6 +118,13 @@ public class LotLookupController {
      */
     @GetMapping("/conflicts")
     public ResponseEntity<List<DataConflictDTO>> getDataConflicts() {
-        return ResponseEntity.ok(dataIntegrityService.detectDataConflicts());
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Data conflict query requested");
+        }
+        List<DataConflictDTO> dataConflicts = dataIntegrityService.detectDataConflicts();
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Data conflict query returned {} record(s)", dataConflicts.size());
+        }
+        return ResponseEntity.ok(dataConflicts);
     }
 }
