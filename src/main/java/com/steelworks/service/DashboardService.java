@@ -2,6 +2,7 @@ package com.steelworks.service;
 
 import com.steelworks.dto.DashboardSummaryDTO;
 import com.steelworks.enums.TimeGrouping;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,9 +33,21 @@ public class DashboardService {
      * @return complete dashboard summary DTO
      */
     public DashboardSummaryDTO getDashboardSummary(TimeGrouping timeGrouping) {
-        // TODO: Default to WEEKLY if null; compute date range from time grouping;
-        // delegate to DefectAnalysisService and ShippingStatusService;
-        // assemble and return DashboardSummaryDTO
-        throw new UnsupportedOperationException("Not yet implemented");
+        TimeGrouping effectiveGrouping = timeGrouping == null ? TimeGrouping.WEEKLY : timeGrouping;
+
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = switch (effectiveGrouping) {
+            case DAILY -> endDate;
+            case WEEKLY -> endDate.minusDays(6);
+            case MONTHLY -> endDate.minusDays(29);
+        };
+
+        DashboardSummaryDTO summary = new DashboardSummaryDTO();
+        summary.setTimeGrouping(effectiveGrouping);
+        summary.setProductionLineRankings(
+                defectAnalysisService.rankProductionLinesByDefects(startDate, endDate));
+        summary.setShippingRiskAlerts(shippingStatusService.getProblematicShippedBatches());
+        summary.setDefectTrends(defectAnalysisService.computeDefectTrends(endDate));
+        return summary;
     }
 }

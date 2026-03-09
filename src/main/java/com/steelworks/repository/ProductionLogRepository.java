@@ -22,6 +22,8 @@ public interface ProductionLogRepository extends JpaRepository<ProductionLog, Lo
     List<ProductionLog> findByIssueFlagTrueAndProductionDateBetween(LocalDate startDate,
             LocalDate endDate);
 
+    List<ProductionLog> findByIssueFlagTrue();
+
     List<ProductionLog> findByProductionLineIdAndProductionDateBetween(Long productionLineId,
             LocalDate startDate, LocalDate endDate);
 

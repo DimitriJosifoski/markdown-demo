@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steelworks Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="page-dashboard">
+<div class="ambient-glow"></div>
+<main class="shell">
+    <header class="topbar">
+        <div class="brand-block">
+            <p class="eyebrow">Steelworks Command</p>
+            <h1>Meeting Dashboard</h1>
+            <p class="subtitle">Production risk, defect trends, and line performance in one view.</p>
+        </div>
+        <nav class="nav-links">
+            <a class="nav-link active" th:href="@{/dashboard}">Dashboard</a>
+            <a class="nav-link" th:href="@{/lots}">Lot Lookup</a>
+        </nav>
+    </header>
+
+    <section class="control-strip">
+        <label for="timeGrouping">Time Grouping</label>
+        <select id="timeGrouping">
+            <option value="DAILY">Daily</option>
+            <option value="WEEKLY" selected>Weekly</option>
+            <option value="MONTHLY">Monthly</option>
+        </select>
+        <button id="refreshDashboard" type="button">Refresh</button>
+        <span id="dashboardStatus" class="status-pill">Loading...</span>
+    </section>
+
+    <section class="kpi-grid">
+        <article class="kpi-card">
+            <h2>Ranked Lines</h2>
+            <p id="kpiLines" class="kpi-value">--</p>
+        </article>
+        <article class="kpi-card">
+            <h2>Risk Alerts</h2>
+            <p id="kpiAlerts" class="kpi-value">--</p>
+        </article>
+        <article class="kpi-card">
+            <h2>Trend Signals</h2>
+            <p id="kpiTrends" class="kpi-value">--</p>
+        </article>
+    </section>
+
+    <section class="panel-grid">
+        <article class="panel">
+            <h2>Production Line Ranking</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Line</th>
+                        <th>Total Defects</th>
+                    </tr>
+                    </thead>
+                    <tbody id="rankingTableBody"></tbody>
+                </table>
+            </div>
+            <p id="rankingEmpty" class="empty-state hidden">No ranking data available for this period.</p>
+        </article>
+
+        <article class="panel">
+            <h2>Shipping Risk Alerts</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Lot</th>
+                        <th>Defect</th>
+                        <th>Severity</th>
+                        <th>Ship Date</th>
+                        <th>Customer</th>
+                    </tr>
+                    </thead>
+                    <tbody id="alertsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="alertsEmpty" class="empty-state hidden">No active shipping risk alerts.</p>
+        </article>
+
+        <article class="panel panel-trends">
+            <h2>Defect Trend Direction</h2>
+            <ul id="trendList" class="trend-list"></ul>
+            <p id="trendsEmpty" class="empty-state hidden">No defect trend data available.</p>
+        </article>
+    </section>
+</main>
+
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>
