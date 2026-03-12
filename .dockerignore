@@ -1,0 +1,14 @@
+.git
+.github
+.vscode
+.idea
+target
+
+.env
+.env.*
+
+db
+docs
+sbom.json
+
+*.log
